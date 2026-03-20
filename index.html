@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Farrah Shah | Creative Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&display=swap" rel="stylesheet">
+    <style>
+        /* CSS STYLES */
+        :root {
+            --bg: #050505;
+            --card-bg: rgba(255, 255, 255, 0.03);
+            --accent: #00d4ff;
+            --text-main: #ffffff;
+            --text-dim: #a0a0a0;
+            --glass-border: rgba(255, 255, 255, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text-main);
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        /* Animated Background for a Motion Designer feel */
+        .bg-glow {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 50% 50%, #1a1a1a 0%, #050505 100%);
+            z-index: -1;
+        }
+
+        /* Navigation */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 30px 8%;
+            position: sticky;
+            top: 0;
+            background: rgba(5, 5, 5, 0.8);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+        }
+
+        .logo {
+            font-weight: 900;
+            font-size: 1.5rem;
+            letter-spacing: 2px;
+        }
+
+        .logo span { color: var(--accent); }
+
+        /* Hero Section */
+        header {
+            height: 90vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 10%;
+        }
+
+        .hero-h1 {
+            font-size: clamp(3rem, 8vw, 6rem);
+            font-weight: 900;
+            line-height: 1;
+            margin-bottom: 20px;
+            background: linear-gradient(to bottom, #fff 40%, var(--text-dim));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-p {
+            font-size: 1.2rem;
+            color: var(--text-dim);
+            max-width: 600px;
+            margin-bottom: 40px;
+        }
+
+        /* Portfolio Grid */
+        .container {
+            padding: 100px 8%;
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            margin-bottom: 50px;
+            text-align: center;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 25px;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--glass-border);
+            padding: 40px;
+            border-radius: 20px;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            text-decoration: none;
+            color: inherit;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            min-height: 200px;
+        }
+
+        .card:hover {
+            transform: translateY(-10px) scale(1.02);
+            background: rgba(255, 255, 255, 0.07);
+            border-color: var(--accent);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+        }
+
+        .card-tag {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--accent);
+            margin-bottom: 15px;
+        }
+
+        .card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 10px;
+        }
+
+        .view-link {
+            font-size: 0.9rem;
+            font-weight: bold;
+            margin-top: 20px;
+            opacity: 0.6;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 100px 8%;
+            border-top: 1px solid var(--glass-border);
+            color: var(--text-dim);
+        }
+
+        /* Animation class for JS */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        @media (max-width: 768px) {
+            .hero-h1 { font-size: 3.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="bg-glow"></div>
+
+    <nav>
+        <div class="logo">FARRAH<span>.</span>SHAH</div>
+        <div class="contact-cta">6+ Years Exp</div>
+    </nav>
+
+    <header>
+        <h1 class="hero-h1">Graphic Design & <br>Video Animation</h1>
+        <p class="hero-p">I am a master of the Adobe Creative Suite, specializing in high-impact visuals and dynamic multimedia storytelling.</p>
+        <a href="#work" style="color: var(--accent); text-decoration: none; font-weight: bold; border-bottom: 2px solid var(--accent);">VIEW PROJECTS</a>
+    </header>
+
+    <section class="container" id="work">
+        <h2>Corporate & Brand Projects</h2>
+        <div class="grid">
+            <a href="https://bmedia-group.com" class="card reveal" target="_blank">
+                <div>
+                    <div class="card-tag">Web & Identity</div>
+                    <h3>B-Media Group</h3>
+                </div>
+                <div class="view-link">Visit Website →</div>
+            </a>
+            <a href="https://miwahomecare.com" class="card reveal" target="_blank">
+                <div>
+                    <div class="card-tag">Care Services</div>
+                    <h3>Miwa Homecare</h3>
+                </div>
+                <div class="view-link">Visit Website →</div>
+            </a>
+            <a href="https://hpspidersfc.com" class="card reveal" target="_blank">
+                <div>
+                    <div class="card-tag">Sports Branding</div>
+                    <h3>HP Spiders FC</h3>
+                </div>
+                <div class="view-link">Visit Website →</div>
+            </a>
+            <a href="https://emsahomecare.com" class="card reveal" target="_blank">
+                <div>
+                    <div class="card-tag">Health & Tech</div>
+                    <h3>Emsa Homecare</h3>
+                </div>
+                <div class="view-link">Visit Website →</div>
+            </a>
+            <a href="https://widehomeservices.com" class="card reveal" target="_blank">
+                <div>
+                    <div class="card-tag">Professional Services</div>
+                    <h3>Wide Home Services</h3>
+                </div>
+                <div class="view-link">Visit Website →</div>
+            </a>
+        </div>
+
+        <h2 style="margin-top: 80px;">Shopify & E-Commerce</h2>
+        <div class="grid">
+            <a href="https://www.analuisa.com" class="card reveal" target="_blank">
+                <div>
+                    <div class="card-tag">Shopify Plus</div>
+                    <h3>Ana Luisa</h3>
+                </div>
+                <div class="view-link">View Store →</div>
+            </a>
+            <a href="https://www.silkandwillow.com" class="card reveal" target="_blank">
+                <div>
+                    <div class="card-tag">Shopify</div>
+                    <h3>Silk & Willow</h3>
+                </div>
+                <div class="view-link">View Store →</div>
+            </a>
+            <a href="https://lootcrate.com" class="card reveal" target="_blank">
+                <div>
+                    <div class="card-tag">Subscription UI</div>
+                    <h3>Loot Crate</h3>
+                </div>
+                <div class="view-link">View Store →</div>
+            </a>
+            <a href="https://tattly.com/" class="card reveal" target="_blank">
+                <div>
+                    <div class="card-tag">Creative E-Com</div>
+                    <h3>Tattly</h3>
+                </div>
+                <div class="view-link">View Store →</div>
+            </a>
+            <a href="https://www.givemetap.com/" class="card reveal" target="_blank">
+                <div>
+                    <div class="card-tag">Sustainability</div>
+                    <h3>GiveMeTap</h3>
+                </div>
+                <div class="view-link">View Store →</div>
+            </a>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 Farrah Shah. Professional Portfolio.</p>
+        <p style="margin-top: 10px; font-size: 0.8rem;">After Effects | Premiere Pro | Photoshop | Illustrator</p>
+    </footer>
+
+    <script>
+        // JS: Scroll Reveal Animation
+        function reveal() {
+            var reveals = document.querySelectorAll(".reveal");
+            for (var i = 0; i < reveals.length; i++) {
+                var windowHeight = window.innerHeight;
+                var elementTop = reveals[i].getBoundingClientRect().top;
+                var elementVisible = 150;
+                if (elementTop < windowHeight - elementVisible) {
+                    reveals[i].classList.add("active");
+                }
+            }
+        }
+
+        window.addEventListener("scroll", reveal);
+
+        // Initial check to reveal items already in view
+        reveal();
+    </script>
+</body>
+</html>
