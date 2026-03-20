@@ -9,12 +9,12 @@
     
     <style>
         :root {
-            --bg: #050505;
-            --surface: #101010;
-            --maroon: #600000;
+            --bg: #080808;
+            --surface: #121212;
+            --maroon: #600000; /* Subtle maroon glow */
             --maroon-light: #900000;
             --text-main: #ffffff;
-            --text-dim: #a0a0a0;
+            --text-dim: #999999;
             --border: rgba(255, 255, 255, 0.05);
             --ease: cubic-bezier(0.19, 1, 0.22, 1);
         }
@@ -32,14 +32,14 @@
             overflow: hidden;
         }
 
-        h1, h2 { font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; letter-spacing: -2px; }
+        h1, h2 { font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; text-transform: lowercase; }
 
         /* Subtle Animated Background Glows */
         .bg-glow {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: 
-                radial-gradient(circle at 10% 10%, rgba(96, 0, 0, 0.15) 0%, transparent 40%),
-                radial-gradient(circle at 90% 90%, rgba(144, 0, 0, 0.1) 0%, transparent 35%);
+                radial-gradient(circle at 10% 10%, rgba(96, 0, 0, 0.1) 0%, transparent 40%),
+                radial-gradient(circle at 90% 90%, rgba(144, 0, 0, 0.08) 0%, transparent 35%);
             z-index: -1;
             animation: glowPulse 10s ease-in-out infinite;
         }
@@ -68,13 +68,13 @@
             content: "ENGINEERING";
             position: absolute;
             top: 20px; left: 20px;
-            color: var(--maroon-light);
+            color: var(--maroon);
             font-size: 0.8rem;
             letter-spacing: 5px;
             font-weight: 600;
         }
 
-        /* Avatar Styling */
+        /* Avatar Styling (Visible and Scaled) */
         .avatar-area { position: relative; }
         
         .avatar-wrapper {
@@ -93,12 +93,12 @@
         }
 
         .avatar-wrapper img {
-            width: 100%;
-            height: 100%;
+            width: 110%; /* Slightly scaled up for a tight frame */
+            height: 110%;
             object-fit: cover;
-            object-position: center top;
+            object-position: center; /* Ensures the portrait is centered */
             display: block;
-            filter: grayscale(20%) contrast(110%);
+            filter: grayscale(10%) contrast(105%); /* Matching the moody aesthetic */
         }
 
         .avatar-wrapper:hover {
@@ -110,12 +110,11 @@
         .text-area { padding-right: 30px; }
         
         .name {
-            font-size: clamp(3rem, 7vw, 5.5rem);
+            font-size: clamp(3rem, 8vw, 6rem);
             line-height: 0.85;
-            margin-bottom: 30px;
-            background: linear-gradient(to bottom, #fff, #ccc);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            margin-bottom: 25px;
+            letter-spacing: -3px;
+            color: var(--maroon-light);
             opacity: 0; transform: translateY(20px);
             animation: textEntry 0.8s var(--ease) forwards 0.3s;
         }
@@ -134,7 +133,7 @@
         .cta-btn {
             display: inline-block;
             padding: 18px 40px;
-            background-color: var(--maroon);
+            background-color: #1a1a1a;
             color: #fff;
             text-decoration: none;
             border-radius: 50px;
@@ -143,13 +142,14 @@
             font-size: 0.9rem;
             letter-spacing: 1px;
             transition: 0.3s var(--ease);
-            border: 2px solid transparent;
+            border: 2px solid var(--maroon);
             opacity: 0; transform: translateY(10px);
             animation: textEntry 0.8s var(--ease) forwards 0.7s;
         }
 
         .cta-btn:hover {
             background-color: var(--maroon-light);
+            border-color: var(--maroon-light);
             box-shadow: 0 0 25px rgba(144, 0, 0, 0.6);
             transform: translateY(-3px);
         }
@@ -177,6 +177,7 @@
         @media (max-width: 900px) {
             #about-me { grid-template-columns: 1fr; text-align: center; gap: 40px; padding: 60px 8%;}
             .text-area { padding-right: 0; }
+            .name { font-size: 4rem; }
             .avatar-wrapper { max-width: 300px; margin: 0 auto; }
         }
         
@@ -196,14 +197,14 @@
         <div class="text-area">
             <h1 class="name">farrah<br>shah</h1>
             <p class="bio-text">
-                I specialize in engineering WordPress ecosystems: from bespoke theme/plugin development to WooCommerce and multisite builds. Using ACF, CPTs, and the REST API, I turn CMS sites into data-driven engines. I also build Headless WordPress apps with React and Node.js.
+                I specialize in engineering WordPress ecosystems: from bespoke theme/plugin development to WooCommerce and multisite builds. Using ACF, CPTs, and the REST API, I turn CMS sites into data-driven engines. I also build Headless WordPress apps with React and Node.js, prioritizing clean code, SEO, and lightning-fast performance.
             </p>
-            <a href="mailto:farrahshaeh@gmail.com" class="cta-btn">Start Ecosystem</a>
+            <a href="mailto:farrahshaeh@gmail.com" class="cta-btn">Connect Ecosystem</a>
         </div>
         
         <div class="avatar-area">
             <div class="avatar-wrapper">
-                <img src="https://i.ibb.co/68Xk5Fw/modern-designer-avatar.webp" alt="Farrah Shah AI Illustration">
+                <img src="image_4.png" alt="Farrah Shah | Systems Illustration">
             </div>
         </div>
     </section>
