@@ -10,12 +10,13 @@
     <style>
         :root {
             --bg: #050505;
-            --surface: #0d0d0d;
+            --surface: #101010;
             --maroon: #600000;
             --maroon-light: #900000;
             --text-main: #ffffff;
-            --text-dim: #999999;
+            --text-dim: #a0a0a0;
             --border: rgba(255, 255, 255, 0.05);
+            --ease: cubic-bezier(0.19, 1, 0.22, 1);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -31,109 +32,179 @@
             overflow: hidden;
         }
 
-        h1 { font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; text-transform: lowercase; }
+        h1, h2 { font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; letter-spacing: -2px; }
 
-        /* Smooth Background Glow */
-        .glow {
+        /* Subtle Animated Background Glows */
+        .bg-glow {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: radial-gradient(circle at 10% 10%, rgba(96, 0, 0, 0.15) 0%, transparent 50%);
+            background: 
+                radial-gradient(circle at 10% 10%, rgba(96, 0, 0, 0.15) 0%, transparent 40%),
+                radial-gradient(circle at 90% 90%, rgba(144, 0, 0, 0.1) 0%, transparent 35%);
             z-index: -1;
+            animation: glowPulse 10s ease-in-out infinite;
         }
 
-        #about-card {
+        /* Container & Layout */
+        #about-me {
             max-width: 1000px;
             width: 90%;
             background: var(--surface);
-            border: 1px solid var(--border);
             border-radius: 40px;
-            padding: 60px;
+            border: 1px solid var(--border);
             display: grid;
             grid-template-columns: 1fr 350px;
-            gap: 50px;
+            gap: 60px;
             align-items: center;
+            padding: 80px 5%;
             box-shadow: 0 40px 100px rgba(0,0,0,0.8);
-            animation: slideIn 1s cubic-bezier(0.19, 1, 0.22, 1);
-        }
-
-        .text-content h1 {
-            font-size: clamp(3rem, 8vw, 5.5rem);
-            line-height: 0.85;
-            margin-bottom: 30px;
-            letter-spacing: -3px;
-            color: var(--maroon-light);
-        }
-
-        .text-content p {
-            font-size: 1.05rem;
-            line-height: 1.7;
-            color: var(--text-dim);
-            margin-bottom: 40px;
-        }
-
-        /* Avatar Styling - THE FIX IS HERE */
-        .avatar-container {
-            width: 350px;
-            height: 350px;
-            border-radius: 30px;
-            overflow: hidden;
-            background: #151515;
-            border: 1px solid var(--maroon);
+            opacity: 0;
+            transform: translateY(40px);
+            animation: containerEntry 1.2s var(--ease) forwards;
             position: relative;
-            transform: rotate(3deg);
-            transition: 0.5s ease;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+            overflow: hidden;
+        }
+        
+        #about-me::before {
+            content: "ENGINEERING";
+            position: absolute;
+            top: 20px; left: 20px;
+            color: var(--maroon-light);
+            font-size: 0.8rem;
+            letter-spacing: 5px;
+            font-weight: 600;
         }
 
-        .avatar-container:hover { transform: rotate(0deg) scale(1.02); }
+        /* Avatar Styling */
+        .avatar-area { position: relative; }
+        
+        .avatar-wrapper {
+            width: 100%;
+            aspect-ratio: 1 / 1;
+            border-radius: 50%;
+            border: 2px solid var(--maroon);
+            background: radial-gradient(circle at 50% 50%, var(--maroon), #000);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            box-shadow: 0 0 50px rgba(96, 0, 0, 0.4);
+            transition: all 0.5s var(--ease);
+            animation: avatarEntry 1.5s var(--ease) forwards;
+        }
 
-        .avatar-container img {
+        .avatar-wrapper img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            display: block; /* Ensures no hidden gaps */
+            object-position: center top;
+            display: block;
             filter: grayscale(20%) contrast(110%);
         }
 
-        .cta {
-            display: inline-block;
-            padding: 18px 40px;
-            background: var(--maroon);
-            color: white;
-            text-decoration: none;
-            border-radius: 100px;
-            font-weight: 600;
-            font-size: 0.9rem;
-            letter-spacing: 1px;
-            transition: 0.3s;
+        .avatar-wrapper:hover {
+            box-shadow: 0 0 70px rgba(96, 0, 0, 0.6);
+            transform: scale(1.02);
         }
 
-        .cta:hover { background: var(--maroon-light); transform: translateY(-3px); }
+        /* Text Styling & Animations */
+        .text-area { padding-right: 30px; }
+        
+        .name {
+            font-size: clamp(3rem, 7vw, 5.5rem);
+            line-height: 0.85;
+            margin-bottom: 30px;
+            background: linear-gradient(to bottom, #fff, #ccc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            opacity: 0; transform: translateY(20px);
+            animation: textEntry 0.8s var(--ease) forwards 0.3s;
+        }
 
-        @keyframes slideIn {
-            from { opacity: 0; transform: translateY(50px); }
+        .bio-text {
+            font-size: 1.05rem;
+            line-height: 1.8;
+            color: var(--text-dim);
+            font-weight: 300;
+            margin-bottom: 40px;
+            opacity: 0; transform: translateY(15px);
+            animation: textEntry 0.8s var(--ease) forwards 0.5s;
+        }
+
+        /* Call to Action Button */
+        .cta-btn {
+            display: inline-block;
+            padding: 18px 40px;
+            background-color: var(--maroon);
+            color: #fff;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            transition: 0.3s var(--ease);
+            border: 2px solid transparent;
+            opacity: 0; transform: translateY(10px);
+            animation: textEntry 0.8s var(--ease) forwards 0.7s;
+        }
+
+        .cta-btn:hover {
+            background-color: var(--maroon-light);
+            box-shadow: 0 0 25px rgba(144, 0, 0, 0.6);
+            transform: translateY(-3px);
+        }
+
+        /* Keyframe Animations */
+        @keyframes containerEntry {
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes avatarEntry {
+            from { opacity: 0; transform: scale(0.8); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        @keyframes textEntry {
             to { opacity: 1; transform: translateY(0); }
         }
 
-        @media (max-width: 900px) {
-            #about-card { grid-template-columns: 1fr; text-align: center; padding: 40px; }
-            .avatar-container { margin: 0 auto; width: 250px; height: 250px; }
-            .text-content h1 { font-size: 4rem; }
+        @keyframes glowPulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
         }
+
+        /* Responsive Design (Tablet/Mobile) */
+        @media (max-width: 900px) {
+            #about-me { grid-template-columns: 1fr; text-align: center; gap: 40px; padding: 60px 8%;}
+            .text-area { padding-right: 0; }
+            .avatar-wrapper { max-width: 300px; margin: 0 auto; }
+        }
+        
+        @media (max-width: 500px) {
+            #about-me { padding: 50px 5%; border-radius: 30px;}
+            .name { font-size: 3.5rem; }
+            .bio-text { font-size: 1rem; }
+        }
+
     </style>
 </head>
 <body>
 
-    <div class="glow"></div>
+    <div class="bg-glow"></div>
 
-    <section id="about-card">
-        <div class="text-content">
-            <h1>farrah<br>shah</h1>
-            <p>I specialize in engineering WordPress ecosystems: from bespoke theme/plugin development to WooCommerce and multisite builds. Using ACF, CPTs, and the REST API, I turn CMS sites into data-driven engines. I also build Headless WordPress apps with React and Node.js.</p>
-            <a href="mailto:farrahshaeh@gmail.com" class="cta">LET'S BUILD</a>
+    <section id="about-me">
+        <div class="text-area">
+            <h1 class="name">farrah<br>shah</h1>
+            <p class="bio-text">
+                I specialize in engineering WordPress ecosystems: from bespoke theme/plugin development to WooCommerce and multisite builds. Using ACF, CPTs, and the REST API, I turn CMS sites into data-driven engines. I also build Headless WordPress apps with React and Node.js.
+            </p>
+            <a href="mailto:farrahshaeh@gmail.com" class="cta-btn">Start Ecosystem</a>
         </div>
-
-        <div class="avatar-container">
-            <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&q=80&w=600" alt="Farrah Shah Portrait">
+        
+        <div class="avatar-area">
+            <div class="avatar-wrapper">
+                <img src="https://i.ibb.co/68Xk5Fw/modern-designer-avatar.webp" alt="Farrah Shah AI Illustration">
+            </div>
         </div>
     </section>
 
